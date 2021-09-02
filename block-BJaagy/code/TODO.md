@@ -14,13 +14,14 @@ function trial(){
 
 2. Create a function by you choice that returns a function reference.
 
-function random(cb){
-  return cb();
+function random(){
+ function test(){
+ return "abcd";
 }
-function test(){
-  return "anything";
+return test;
 }
-random(test)
+
+random()
 
 3. Create a higher order function called `map` that takes two inputs:
    - An array of numbers/string/boolean etc
@@ -51,11 +52,9 @@ multiplyByTwo(2); //-> 4
 
 ```js
 function forEach(arr,cb){
-  finalArr = [];
   for(let elm of arr){
-    finalArr.push(cb(elm));
+    cb(elm);
   }
-  return finalArr;
 }
 
 // Test Your Code
@@ -73,7 +72,9 @@ console.log(alphabet); //prints 'abcd'
 function filter(arr,cb){
   finalArr=[];
   for(let elm of arr){
-    finalArr.push(cb(elm))
+    if(cb(elm)){
+      finalArr.push(elm) 
+    } 
   }
   return finalArr;
 }
