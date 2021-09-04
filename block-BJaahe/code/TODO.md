@@ -90,12 +90,12 @@ When `forEach` function is called it returns another function. When the returned
 function forEach(arr) {
   let index = 0;
   return function inside(){
-    return ++index
+    return arr[index++]
   }
   
 }
 
-let next = [1, 2, 3, 4, 5];
+let next = forEach([1, 2, 3, 4, 5]);
 next(); // 1
 next(); // 2
 next(); // 3
@@ -130,22 +130,21 @@ manager('Head'); // Head Manager
 
 ```js
 function changeSalary(currentSalary) {
-  let value = {};
-    value.raise = function(){
+  return{
+    raise(){
       return currentSalary + 500;
-    }
+    },
 
-    value.lower = function(){
+    lower(){
       return currentSalary - 500;
-    }
+    },
 
-    value.current = function(currentSalary){
+    current(){
       return currentSalary;
     }
 
-    return value;
   }
- 
+}
 
 
 let sam = changeSalary(2000);
@@ -163,24 +162,21 @@ arya.lower(); // 3500
 
 ```js
 function nameFactory(firstName, lastName){
-  let name = {
-    firstName: firstName,
-    lastName : lastName
+   return{
+      getFullName(){
+      return firstName +' '+ lastName;
+    },
+
+    setFirstName(fName){
+      firstName = fName;
+      return fName +' '+ lastName;
+    },
+
+    setLastName(lName){
+      lastName = lName;
+      return  firstName +' '+ lastName;
+    }
   }
-    name.getFullName = function(){
-      return name.firstName +' '+ name.lastName;
-    }
-
-    name.setFirstName = function(fName){
-      name.firstName = fName;
-      return  name.firstName +' '+ name.lastName;
-    }
-
-    name.setLastName = function(lName){
-      name.lastName = lName;
-      return  name.firstName +' '+ name.lastName;
-    }
-   return name;
 }
 
 let arya = nameFactory('Arya', 'Stark');
@@ -194,11 +190,12 @@ arya.setLastName('Lannister'); // "Jon Lannister"
 The returned function accepts a string (children) and returns the children with the tag you passed.
 
 ```js
-function createTag(elem) {
-
-     return (value) =>{
-         return `<${elem}>${value}<${elem}>`;
-     }
+function createTag(tag) {
+  return (child) =>{
+    let elm = document.createElement(tag);
+    elm.innerText = child;
+    return elm;
+   }
   
 }
 
