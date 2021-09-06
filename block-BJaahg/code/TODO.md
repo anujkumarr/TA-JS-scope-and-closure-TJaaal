@@ -371,5 +371,7 @@ let allFunctions = [
   half,
 ];
 
+allFunctions.reduce((acc,cv) => cv(acc),100); 
+
 // Answer is: 447
 ```
