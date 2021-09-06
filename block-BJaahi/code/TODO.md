@@ -501,16 +501,23 @@ let add = (a, b) => {
 
 <!-- Answer -->
 ```js
+//Declaration
+
 function test(a) {
   let num1 = 21;
-  return (a, b) => {
-  return a + b;
-};
   return add(a, num1);
 }
 
-let sum = test(100);
+let sum ;
+let add ;
 
+// Execution
+
+sum = test(100);
+
+ add = (a, b) => {
+  return a + b;
+};
 
 ```
 
@@ -536,5 +543,20 @@ function add(a, b) {
 <!-- Answer -->
 
 ```js
-// Your code goes here
+// Declaration Phase
+function test(a) {
+  let num1 = 21;
+  return add(a, num1);
+}
+function add(a, b) {
+  return a + b;
+}
+let sum;
+
+
+// Execution Phase
+
+ sum = test(100);
+
+
 ```
