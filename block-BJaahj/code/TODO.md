@@ -29,8 +29,7 @@ console.log(
 ```js
 function multiMap(arrVals, arrCallbacks) {
  return arrVals.reduce((acc,cv) =>{
-    let values = arrCallbacks.map((fn) => fn(cv));
-    console.log(values)
+    let values = arrCallbacks.map((fn) => fn(cv)); 
     acc[cv] = values;
     return acc; 
   },{})
@@ -103,7 +102,7 @@ To build the object, `objectWithArrayValues` will pass each value of the first a
 In the final object the key will be the value form the first array like `hi` and value will be an array of values returned from each function like `['HI', 'Hi', 'HiHi']`
 
 ```js
-function objOfMatchesWithArray(array1, array2, callback) {
+function objOfMatchesWithArray(array1, callback) {
    return array1.reduce((acc, cv, index) => {
     acc[cv] = callback.map((fn) => fn(cv));
     return acc;
@@ -150,7 +149,15 @@ Create a function named `schedule` which accept two arguments an array of functi
 The function `schedule` will execute the function at first index after the value in value on first index in second array. i.e execute `sayHi` after `1` second and `sayHello` after `2` second.
 
 ```js
-function schedule() {}
+function schedule(callbacks, array) {
+  if (callbacks.length !== array.length) {
+    alert("Invalid Input");
+    return;
+  }
+  callbacks.forEach((fn, index) => {
+    setTimeout(fn, array[index] * 1000);
+  });
+}
 
 function sayHi() {
   console.log('Hi');
