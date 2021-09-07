@@ -28,12 +28,20 @@ The returned function either accepts two parameter or one parameter.
 
 ```js
 function multipleCensor() {
- return function inside(one, two){
-    let arr = [];
-    arr.push(one, two);
-    return function(str){
-      return str.replace(arr[0], arr[1])
-    }
+   let words = [];
+   return function inside(...params){
+   if(params.length === 1){
+     let quote = params[0];
+     words.forEach(pair => {
+       quote = quote.replace(pair[0], pair[1])
+     });
+     return quote;
+   } else if(params.length === 2){
+     words.push(params);
+   } else{
+     alert("The number of parameters are invalid")
+   }
+    
  }
 }
 
@@ -90,8 +98,12 @@ function createCache(cb,pwd) {
   let obj = {};
   return function (value) {
     if (value !== pwd) {
-      obj[value] = cb(value);
-      return cb(value);
+      if(obj[value]){
+        return obj[value];
+      } else {
+        obj[value] = cb(value);
+        return cb(value);
+      }
     } else {
       return obj;
     }
