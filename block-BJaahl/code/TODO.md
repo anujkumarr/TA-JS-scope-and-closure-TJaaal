@@ -51,13 +51,14 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest
 
 ```js
 function once(cb, ...rest) {
-   let count = 1;
- return function(){
+  let count = 1;
+  return function(){
    if(count > 1){
-     alert("can't be called twice")
+     alert("can't be called twice");
    } else{
      count = count + 1;
-     cb(rest);
+     cb(...
+     rest);
    }
  }
 }
@@ -72,11 +73,11 @@ log(); // return undefinde (can't be called twice)
 
 ```js
 function nTimes(cb, times, ...rest) {
-  var i=0;
+  var i=1;
  return function(){
    if(i <=times){
     ++i; 
-    cb(rest); 
+    cb(...rest); 
   } else{
     return "can't be called";
   }
